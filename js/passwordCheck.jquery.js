@@ -77,19 +77,17 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     This method should return true if the length of passwordField value is greater or equal to this.minLength
      */
     this.checkForLength = function() {
-        //@todo
-        //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+        return this.passwordField.value.length >= that.minLength;
     };
 
     /*
     This method returns true if no special Character "!§$_.:,;" is found in this.password - otherwise false
      */
     this.checkForSpecialCharacters = function() {
-        //@todo
-        //have a look at javascript string methods and properties
-        //you could probably "match" it somehow
-        return true; //this needs to be replaced!
+        //Gehe von Angabefehler aus und man will Sonderzeichen im Passwort haben,
+        // da es so im PDF steht - der Kommentar der Methode und der Code beim PW Check passen nicht zusammen
+        var format = /[!§$_.:,;]/;
+        return format.test(this.passwordField.value)
     };
     //TODO 2 end
 }
