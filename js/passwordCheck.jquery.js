@@ -8,9 +8,9 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.minLength = 8; //this is what we defined and what we need to consider in our length check
 
     //this attributes are set with our constructor
-    this.wrapperField = $(wrapperId);
-    this.passwordField = $(passwordInputFieldId);
-    this.passwordSubmitButton = $(passwordSubmitButtonId);
+    this.wrapperField = $(wrapperId); //document.getElementById(wrapperId);
+    this.passwordField = $(passwordInputFieldId); //document.getElementById(passwordInputFieldId);
+    this.passwordSubmitButton = $(passwordSubmitButtonId); //document.getElementById(passwordSubmitButtonId);
 
 
     var that = this; //a trick because this is a keyword and means different things in a new context! Especially when you work with events or if you call functions outside your class "this" won't mean you!
@@ -21,22 +21,22 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     //if we are in the password field an enter text - JavaScript Method "onkeyup" or "onkeup" - again in our case the field this.passwordField
     //if we try to click the submit button - JavaScript Method "onclick" - in our case this.passwordSubmitButton
 
-    this.passwordField.blur(function() {
+    this.passwordField.blur(function() { // statt = in Vanilla - ( in jQuery
         //the keyword "this" is always referring to its context.
         //onblur is an event which happens in "passwordField" -> so the keyword "this" would refer to the passwordField NOT to our class
         //therefore we previously saved "this" in a variable called "that"
         that.check();
     });
 
-    this.passwordField.keydown(function() {
+    this.passwordField.keydown(function() {// statt = in Vanilla - ( in jQuery
         that.check();
     });
 
-    this.passwordField.focus(function() {
+    this.passwordField.focus(function() {// statt = in Vanilla - ( in jQuery
         that.check();
     });
 
-    this.passwordSubmitButton.click(function() {
+    this.passwordSubmitButton.click(function() {// statt = in Vanilla - ( in jQuery
         that.check();
     });
 
@@ -51,6 +51,8 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
             //if it is long enough and has a special character - everything is fine
             if(longEnough && hasSpecialChars) {
+                //this.wrapperField.className = this.successClass;
+                // this.passwordSubmitButton.disabled = false;
                 this.wrapperField.removeClass(this.warningClass + ' ' + this.errorClass).addClass(this.successClass);
                 this.passwordSubmitButton.attr('disabled', false);
             } else if(!hasSpecialChars && longEnough) { //if it is long enough but it has no special character set class warning

@@ -15,13 +15,6 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
     var that = this; //a trick because this is a keyword and means different things in a new context! Especially when you work with events or if you call functions outside your class "this" won't mean you!
 
-    //TODO start
-    //now for the events which should fire:
-    //if we leave the password field (focus is lost) - JavaScript Method "onblur" for an input field in our case the field this.passwordField
-    //if we enter the password field (focus is set) - JavaScript Method "onfocus" for an input field - again in our case the field this.passwordField
-    //if we are in the password field an enter text - JavaScript Method "onkeyup" or "onkeup" - again in our case the field this.passwordField
-    //if we try to click the submit button - JavaScript Method "onclick" - in our case this.passwordSubmitButton
-
     this.passwordField.onblur = function() {
         //the keyword "this" is always referring to its context.
         //onblur is an event which happens in "passwordField" -> so the keyword "this" would refer to the passwordField NOT to our class
@@ -31,8 +24,17 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
     //TODO implement the other events in the exact same way!
 
+    this.passwordField.onfocus = function(){
+        that.check();
+    };
 
+    this.passwordField.onkeyup = function(){
+        that.check();
+    };
 
+    this.passwordSubmitButton.onclick = function(){
+        that.check();
+    };
 
     //TODO end
 
@@ -69,19 +71,17 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     This method should return true if the length of passwordField value is greater or equal to this.minLength
      */
     this.checkForLength = function() {
-        //@todo
-        //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+        return this.passwordField.value.length >= that.minLength;
     };
 
     /*
     This method returns true if no special Character "!§$_.:,;" is found in this.password - otherwise false
      */
     this.checkForSpecialCharacters = function() {
-        //@todo
-        //have a look at javascript string methods and properties
-        //you could probably "match" it somehow
-        return true; //this needs to be replaced!
+        //Gehe von Angabefehler aus und man will Sonderzeichen im Passwort haben,
+        // da es so im PDF steht - der Kommentar der Methode und der Code beim PW Check passen nicht zusammen
+        var format = /[!§$_.:,;]/;
+        return format.test(this.passwordField.value)
     };
 }
 
